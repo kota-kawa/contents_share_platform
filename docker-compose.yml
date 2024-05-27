@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    ports:
+      - "5001:5001"
+    restart: unless-stopped
+    networks:
+      - fl_net
+    environment:
+      MYSQL_USER: "user"
+      MYSQL_PASSWORD: "password"
+      MYSQL_DATABASE: "myapp"
+    volumes:
+      - .:/app
+    depends_on:
+      - mysql
+
+  mysql:
+    image: mysql:8.0
+    restart: unless-stopped
+    networks:
+      - fl_net
+    volumes:
+    - mysql_volume2:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: "myapp"
+      MYSQL_USER: "user"
+      MYSQL_PASSWORD: "password"
+      MYSQL_ROOT_PASSWORD: "rootpassword"
+    
+networks:
+  fl_net:
+    driver: bridge
+
+volumes:
+  mysql_volume2:
+    driver: local
+
