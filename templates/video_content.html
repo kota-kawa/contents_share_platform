@@ -1,0 +1,284 @@
+{% extends "layout.html" %} {% block contents %}
+
+<link href="/static/video/videoplayer.min.css" rel="stylesheet">
+<link href="/static/icon/bootstrap-icons.css" rel="stylesheet">
+
+<style>
+  /*range要素の標準のデザインを消す*/
+  /* Safari */
+  input[type="range"]::-webkit-slider-thumb {
+    background-color: rgb(20, 221, 104);
+  }
+
+  /* Chrome, Edge, and Opera */
+  input[type="range"]::-moz-range-thumb {
+    background-color: rgb(20, 221, 104);
+  }
+
+  /* Firefox */
+  input[type="range"]::-ms-thumb {
+    background-color: rgb(20, 221, 104);
+  }
+
+  input[type="range"]::-webkit-slider-thumb {
+    background-color: rgb(20, 221, 104);
+  }
+
+  input[type="range"]::-moz-range-thumb {
+    background-color: rgb(20, 221, 104);
+  }
+
+  input[type="range"]::-ms-thumb {
+    background-color: rgb(20, 221, 104);
+  }
+
+  input[type="range"]::-webkit-slider-thumb:hover {
+    background-color: rgb(29, 235, 235);
+  }
+
+  input[type="range"]::-moz-range-thumb:hover {
+    background-color: rgb(29, 235, 235);
+  }
+
+  input[type="range"]::-ms-thumb:hover {
+    background-color: rgb(29, 235, 235);
+  }
+
+
+
+
+
+  /* 再生ボタンにスタイルを適用 */
+  video::-webkit-media-controls-play-button {
+    background-color: red;
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+  }
+
+  /* 一時停止ボタンにスタイルを適用 */
+  video::-webkit-media-controls-pause-button {
+    background-color: red;
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+  }
+
+  /* 巻き戻しボタンにスタイルを適用 */
+  video::-webkit-media-controls-rewind-button {
+    background-color: red;
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+  }
+
+  /* 早送りボタンにスタイルを適用 */
+  video::-webkit-media-controls-fast-forward-button {
+    background-color: red;
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+  }
+
+  /* シークバーにスタイルを適用 */
+  video::-webkit-media-controls-seek-back-button,
+  video::-webkit-media-controls-seek-forward-button,
+  video::-webkit-media-controls-timeline,
+  video::-webkit-media-controls-current-time-display,
+  video::-webkit-media-controls-time-remaining-display {
+    color: #E3474F;
+  }
+
+  body {
+    background-color: rgb(172, 215, 169);
+  }
+
+  .content {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 800px;
+  }
+
+  .profile_img {
+    height: 250px;
+  }
+
+  .profile_img img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+
+  .comment_img img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .comment-form {
+    margin: 20px;
+  }
+
+  .remove-button {
+    margin-top: 50px;
+    margin-left: 50px;
+  }
+
+  /*リンクのためのaタグの表示を消す　ボタンを青くしないため*/
+  a,
+  a:hover,
+  a:visited {
+    text-decoration: none;
+    /*リンクのついたボタンを青くしないために*/
+    color: inherit;
+  }
+</style>
+
+<div class="container">
+
+  <button class="like-btn"><i class="bi bi-heart"></i> Like</button>
+
+  <div class="content bg-light">
+    <div class="row">
+      <div class="col">
+        <div class="position-relative">
+          <div class="hide">
+            <div class="box">
+              <div class="ratio ratio-16x9">
+                <!--controlsList="nodownload" d-none-->
+                <video muted="" playsinline="" class="video" id="video">
+                  <source src="{{ folder }}/{{ file }}" type="video/mp4">
+
+                  <div class="overlay2">
+                    <div class="content">
+                      <button id="overlay-button" class="btn btn-lg back" type="button"><i
+                          class="bi bi-arrow-counterclockwise"></i></button>
+                    </div>
+                  </div>
+
+
+                </video>
+
+                <div class="d-flex justify-content-center before_div">
+                  <div style="top: 25%;" class="position-absolute top-60
+                  start-20 my-2">
+                    <button id="big_video-playpause" class="btn btn-lg btn before_play" type="button">
+                      <i class="bi bi-play-btn big-play-fill"></i></button>
+                  </div>
+                </div>
+
+                <div class="overlay1 d-none"><!--d-none-->
+                  <div class="d-flex justify-content-center">
+                    <div style="top: 25%;" class="position-absolute top-60
+                    start-20 my-2">
+                      <button id="big_btn_back" class="btn btn-lg back" type="button"><i class="bi bi-arrow-counterclockwise
+                        "></i></button>
+
+                      <button id="big_video-playpause" class="btn btn-lg btn play" type="button">
+                        <i class="bi bi-play-fill big-play-fill d-none"></i><i
+                          class="bi bi-pause-fill big-pause-fill"></i></button>
+                      <button id="big_btn_forward" class="btn btn-lg go" type="button"><i
+                          class="bi bi-arrow-clockwise"></i></button>
+                    </div>
+                  </div>
+
+                  <p1 class="position-absolute"><time id="playback_position">0:00</time></p1>
+                  <div class="position-absolute start-50 translate-middle
+                  px-3
+                  w-100 playbar" style="top: 85%;">
+                    <input type="range" name="speed" class="form-range range" id="progress" value="0" min="0" step="1">
+                  </div>
+                  <p2 class="position-absolute"><time id="end_position"></time></p2>
+                  <button class="btn btn-lg btn-video-playpause
+                  position-absolute start-0" data-bs-toggle="tooltip" title="Play Video" type="button"><i
+                      class="bi bi-play-fill"></i><i class="bi bi-pause-fill d-none"></i></button>
+
+                  <button class="btn btn-lg
+                  btn-video-volume mx-2 position-absolute" type="button"><i class="bi bi-volume-up"></i><i
+                      class="bi bi-volume-mute d-none"></i></button>
+
+                  <button class="btn btn-lg
+                  btn-video-fullscreen position-absolute" title="Full
+                  Screen"><i class="bi bi-arrows-fullscreen"></i></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--　コンテンツの削除　-->
+      {% if mode == 'private' %}
+      <form id="form" action="/contents_remove/{{ user_name }}/{{ album_id }}" method="POST"
+        enctype="multipart/form-data">
+        <div class="remove-button">
+          <button type="submit" class="btn btn-secondary">remove</button>
+        </div>
+      </form>
+      {% endif %}
+
+      <div class="profile_img text-center">
+        {% if mode == 'private' %}
+        <a href="/user-photos/{{ contents_user }}">
+          <img src="{{ icon }}" alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2">
+          <p>{{ user_name }}</p>
+        </a>
+
+        {% else %}
+        <a href="/photos/{{ contents_user }}">
+          <img src="{{ icon }}" alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2"> </a>
+        <p>{{ to_user_name }}</p>
+
+        {% if mode == 'unfollow' %}
+
+        <form id="form" action="/follow/{{ to_user_name }}" method="POST" enctype="multipart/form-data">
+          <button id="submit-button" type="button" class="btn btn-secondary"><a id="follow">Follow</a></button>
+
+        </form>
+
+        {% else %}
+        <form id="form" action="/follow/{{ to_user_name }}" method="POST" enctype="multipart/form-data">
+          <button id="submit-button" type="button" class="btn btn-secondary"><a id="follow">Unfollow</a></button>
+
+        </form>
+
+        {% endif %}
+
+        {% endif %}
+
+      </div>
+
+      <form action="/post-comment/{{ album_id }}/{{ file_id }}" method="POST" enctype="multipart/form-data"
+        class="pure-form pure-form-stacked">
+
+        <fieldset>
+
+          <div class="comment-form">
+            <div class="mb-3">
+              <label for="exampleFormControlTextarea1" class="form-label">コメント</label>
+              <textarea name="comment" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            </div>
+            <div class="d-flex justify-content-end comment-button">
+              <button class="btn btn-primary btn-lg btn-block" type="submit" control-id="ControlID-20">コメントする</button>
+            </div>
+          </div>
+    </div>
+    </fieldset>
+    </form>
+
+
+
+
+
+  </div>
+</div>
+</div>
+
+
+
+<script src="/static/video/example.js"></script>
+
+{% endblock %}

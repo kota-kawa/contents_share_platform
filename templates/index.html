@@ -1,0 +1,65 @@
+{% extends "layout.html" %} {% block contents %}
+<div class="content">
+
+
+  <div id="info">
+    <form action="/upload" method="POST" enctype="multipart/form-data" class="pure-form pure-form-stacked">
+      <fieldset>
+        <legend>最初にファイルを選んでください。</legend>
+        <div class="fblock">
+          <label for="upfile">ファイル選択(10MBまで)</label>
+
+          <input type="file" name="file" multiple="" id="upfile"
+            accept=".jpg, .png, .gif,.html,.css,.docx,.xls,.xlsb,.xlsm,.xlsx,.pptx">
+        </div>
+
+
+
+        <script>
+          const sizeLimit = 1024 * 1024 * 10;// 制限サイズ
+          const fileInput = document.getElementById('upfile'); // input要素
+          // changeイベントで呼び出す関数
+          const handleFileSelect = () => {
+            const files = fileInput.files;
+            for (let i = 0; i < files.length; i++) {
+              if (files[i].size > sizeLimit) {
+                // ファイルサイズが制限以上
+                alert('ファイルサイズは10MB以下にしてください'); // エラーメッセージを表示
+                fileInput.value = ''; // inputの中身をリセット
+                return; // この時点で処理を終了する
+              }
+            }
+          }
+          // フィールドの値が変更された時（≒ファイル選択時）に、handleFileSelectを発火
+          fileInput.addEventListener('change', handleFileSelect);
+        </script>
+
+
+
+
+
+
+        <div style="padding:12px;">
+          {% for result in data %}
+          <div class="photo" style="float:left;width:160px;">
+            <img src='{{ result["folder"] }}/{{ result["file"] }}' width="150"><br>
+
+            <span class="datetime">{{ result ["time"] }}</span>
+          </div>
+          {% endfor %}
+        </div>
+        <div style="clear:both;"></div>
+
+        <!--ここから、ここから  -->
+        {% for result in data %}
+        <div class="box">
+          <img src='{{ result["folder"] }}/{{ result["file"] }}' text-align:right; width="60" height="60" alt="" />
+          <p class="box_h">ニックネーム {{ result["namae"] }} </p>
+          <p>{{ result["time"] }} , {{ result["file"] }} , {{ result["suji"] }} </p>
+        </div>
+        {% endfor %}
+
+
+
+  </div>
+  {% endblock %}

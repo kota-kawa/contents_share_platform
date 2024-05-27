@@ -1,0 +1,258 @@
+{% extends "layout.html" %}
+<link href="/static/css/content.css" rel="stylesheet">
+{% block contents %}
+
+<div class="content">
+  <main role="main">
+    <div class="container">
+      <div class="album py-5 bg-light">
+        <div class="row">
+          {% if contents_kinds != 'audio' %}
+          <div id="carouselExampleIndicators" class="carousel carousel-dark slide" data-bs-ride="true">
+            <div class="carousel-indicators">
+              {% if album_count > 1 %}
+              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+                aria-current="true" aria-label="Slide 1"></button>
+              {% endif %}
+
+              {% for i in range(album_count - 1) %}
+
+              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{ i+1 }}"
+                aria-label="{{ i + 2 }}"></button>
+
+              {% endfor %}
+
+            </div>
+
+
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <div class="sample" style="text-align: center">
+                  <img src='{{ folder }}/{{ file }}'>
+                </div>
+              </div>
+
+              {% for result in data %}
+              {% if result["file"] != file %}
+              <div class="carousel-item">
+                <div class="sample" style="text-align: center">
+                  <img src='{{ result["folder"] }}/{{ result["file"] }}'>
+                </div>
+              </div>
+              {% endif %}
+              {% endfor %}
+            </div>
+            {% if album_count > 1 %}
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+              data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+              data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+            {% endif %}
+            <br>
+          </div>
+          {% endif %}
+
+          <!--　コンテンツの削除　-->
+          {% if mode == 'private' %}
+          <form id="form" action="/contents_remove/{{ user_name }}/{{ album_id }}" method="POST"
+            enctype="multipart/form-data">
+            <div class="remove-button">
+              <button type="submit" class="btn btn-secondary">remove</button>
+            </div>
+          </form>
+          {% endif %}
+
+          <div class="profile_img text-center">
+            {% if mode == 'private' %}
+            <a href="/user-photos/{{ contents_user }}">
+              <img src="{{ icon }}" alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2">
+              <p>{{ user_name }}</p>
+            </a>
+
+            {% else %}
+            <a href="/photos/{{ contents_user }}">
+              <img src="{{ icon }}" class="img-fluid img-thumbnail mt-4 mb-2"> </a>
+            <p>{{ to_user_name }}</p>
+
+            {% if mode == 'unfollow' %}
+
+            <form id="form" action="/follow/{{ to_user_name }}" method="POST" enctype="multipart/form-data">
+              <button id="submit-button" type="button" class="btn btn-secondary"><a id="follow">Follow</a></button>
+
+            </form>
+
+            {% else %}
+            <form id="form" action="/follow/{{ to_user_name }}" method="POST" enctype="multipart/form-data">
+              <button id="submit-button" type="button" class="btn btn-secondary"><a id="follow">Unfollow</a></button>
+
+            </form>
+
+
+            {% endif %}
+
+            {% endif %}
+
+
+
+          </div>
+
+          <form action="/post-comment/{{ album_id }}/{{ file_id }}" method="POST" enctype="multipart/form-data"
+            class="pure-form pure-form-stacked">
+
+            <fieldset>
+
+              <div class="comment-form">
+                <div class="mb-3">
+                  <label for="exampleFormControlTextarea1" class="form-label">コメント</label>
+                  <textarea name="comment" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                </div>
+                <div class="d-flex justify-content-end comment-button">
+                  <button class="btn btn-primary btn-lg btn-block" type="submit"
+                    control-id="ControlID-20">コメントする</button>
+                </div>
+              </div>
+        </div>
+        </fieldset>
+        </form>
+
+      </div>
+    </div>
+</div>
+</div>
+
+
+{% for result in comment %}
+<div class="row d-flex justify-content-center">
+  <div class="col-md-8 col-lg-6">
+    <div class="card-body p-4">
+      <div class="card">
+        <div class="card-body">
+          <div class="d-flex flex-row align-items-center comment_img">
+            <img src="{{ result['icon'] }}">
+            <p class="small mb-0 ms-2">{{ result["user_name"] }}</p>
+          </div>
+        </div>
+
+        <p>　　{{ result["comment"] }}</p>
+      </div>
+
+    </div>
+  </div>
+</div>
+</div>
+{% endfor %}
+
+
+</main>
+
+
+
+<style>
+  body {
+    background-color: rgb(172, 215, 169);
+  }
+
+  .content {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 800px;
+  }
+
+
+  .sample {
+    height: 500px;
+  }
+
+  .sample img {
+    object-fit: cover;
+    width: auto;
+    height: 500px;
+    text-align: center;
+  }
+
+
+  .profile_img {
+    height: 250px;
+  }
+
+  .profile_img img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+
+  .comment_img img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .comment-form {
+    margin: 20px;
+  }
+
+  .remove-button {
+    margin-left: 50px;
+  }
+
+  .audio-file {
+    margin: 5px;
+  }
+
+  /*リンクのためのaタグの表示を消す　ボタンを青くしないため*/
+  a,
+  a:hover,
+  a:visited {
+    text-decoration: none;
+    /*リンクのついたボタンを青くしないために*/
+    color: inherit;
+  }
+</style>
+
+<script>
+  const follow = document.querySelector('#follow');
+  const form = document.getElementById("form")
+  const submitButton = document.getElementById("submit-button")
+
+  submitButton.onclick = () => {
+    const formData = new FormData(form)
+    const action = form.getAttribute("action")
+    const options = {
+      method: 'POST',
+      body: formData,
+    }
+
+    fetch(action, options).then((e) => {
+      if (e.status === 200) {
+
+        if (follow.textContent == 'Unfollow') {
+          follow.textContent = 'Follow';
+          alert("0")
+        }
+        else {
+          follow.textContent = 'Unfollow';
+          alert("1")
+        }
+
+        alert("保存しました。")
+        return
+      }
+      alert("保存できませんでした。")
+    })
+  }
+</script>
+
+</div>
+
+
+
+{% endblock %}

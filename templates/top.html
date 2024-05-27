@@ -1,0 +1,438 @@
+{% extends "layout.html" %} {% block contents %}
+
+
+
+
+<link rel="stylesheet" href="/static/css/top-page.css">
+
+
+<header class="masthead">
+  <div class="container position-relative">
+    <div class="row justify-content-center align-items-center">
+      <div class="col-12 col-xl-6 text-center">
+        <!-- Page heading-->
+        <h5 class="text-white mb-5">探している画像をみつけよう！</h5>
+        <!-- Signup form-->
+        <form action="/search" method="POST" class="form-subscribe" id="contactForm" data-sb-form-api-token="API_TOKEN">
+          <div class="row">
+            <div class="col">
+              <input class="form-control form-control-lg" name="kensaku" id="emailAddress" type="text"
+                placeholder="検索キーワード" data-sb-validations="required,email" />
+            </div>
+            <div class="col-auto">
+              <button class="btn btn-primary btn-lg btn-gradient" type="submit">　検索　</button>
+            </div>
+          </div>
+          <div class="invalid-feedback text-white" data-sb-feedback="emailAddress:required">検索キーワードが必要です。</div>
+          <div class="invalid-feedback text-white" data-sb-feedback="emailAddress:email">有効なメールアドレスを入力してください。</div>
+        </form>
+      </div>
+    </div>
+  </div>
+</header>
+
+
+<br>
+
+<style>
+  /*マウスオーバー時にボタンの表示など*/
+  @import url(https://fonts.googleapis.com/css?family=Raleway);
+
+  .content {
+    position: relative;
+  }
+
+  .recomend-image {
+    width: auto;
+    height: 250px;
+
+  }
+
+  .recomend-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .profile_img {
+    height: 50px;
+  }
+
+  .profile_img img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+
+
+  .code-img img {
+    object-fit: cover;
+    width: auto;
+    height: 200px;
+  }
+
+  .content-overlay .image {
+    opacity: 1;
+    transition: .5s ease;
+    backface-visibility: hidden;
+  }
+
+  .video {
+    opacity: 1;
+    transition: .5s ease;
+    backface-visibility: hidden;
+  }
+
+  .content .content-overlay {
+    background: rgba(155, 154, 154, 0.7);
+    position: absolute;
+    height: 15%;
+    width: 100%;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    opacity: 0;
+    -webkit-transition: all 0.4s ease-in-out 0s;
+    -moz-transition: all 0.4s ease-in-out 0s;
+    transition: all 0.4s ease-in-out 0s
+  }
+
+
+  .overlay1 {
+    transition: .5s ease;
+    opacity: 0;
+    position: absolute;
+    top: 7%;
+    left: 75%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+
+  }
+
+  .overlay2 {
+    transition: .5s ease;
+    opacity: 0;
+    position: absolute;
+    top: 80%;
+    left: 20%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+
+  }
+
+  .content:hover .content-overlay {
+    opacity: 1
+  }
+
+  .content:hover .image {
+    opacity: 0.3;
+  }
+
+  .content:hover .video {
+    opacity: 0.3;
+  }
+
+  .content:hover .overlay1 {
+    opacity: 1;
+  }
+
+  .content:hover .overlay2 {
+    opacity: 1;
+  }
+
+  .text {
+    color: rgb(218, 218, 218);
+    font-size: 22px;
+  }
+
+  /*ボタンの上にマウスが乗った時に色を付ける*/
+  .btn-01:hover {
+    background-color: rgb(7, 83, 12);
+  }
+
+  .btn-01 i {
+
+    color: rgb(0, 0, 0)
+  }
+
+  /*リンクのためのaタグの表示を消す　ボタンを青くしないため*/
+  a,
+  a:hover,
+  a:visited {
+    text-decoration: none;
+    /*リンクのついたボタンを青くしないために*/
+    color: inherit;
+  }
+</style>
+
+
+
+<div class="album py-5 bg-light">
+
+  <div class="container">
+
+    <p class="h1">おすすめ画像素材</p>
+    <div class="row">
+      {% for result in data %}
+      <div class="col-lg-4 col-md-12 mb-4 ">
+        <div class="content">
+          <div class="content-overlay">
+          </div>
+
+          <div class="top-img">
+            <a href="/{{ result['user_name'] }}/content/{{ result['album_id']}}/{{ result['file_id'] }}">
+              <img src="{{ result['folder'] }}/{{ result['file'] }}" class="rounded" alt
+                onerror="this.onerror= null; this.src='';" /><!--w-100 shadow-1-strong rounded mb-3 im-->
+            </a>
+          </div>
+
+          <div class="overlay1">
+            <div class="row">
+              <div class="col-4">
+                <a href="https://qiita.com/nakanishi03/items/c80a16b9b9796c25f890">
+                  <img class="mr-1 btn-01" src="/static/icon/suit-heart.svg" alt="My Happy SVG" />
+                </a>
+              </div>
+              <div class="col-4">
+                <img class="mr-1 btn-01" src="/static/icon/bookmark.svg" alt="My
+                  Happy SVG" />
+              </div>
+              <div class="col-4">
+                <img class="mr-1 btn-01" src="/static/icon/download.svg" alt="My
+                  Happy SVG" />
+              </div>
+            </div>
+          </div>
+          <div class="overlay2">
+            <div class="text">John Doe</div>
+          </div>
+
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+
+    <p class="h1">おすすめ動画素材</p>
+    <div class="row">
+
+      {% for result in video_data %}
+      <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
+        <div class="content">
+          <div class="content-overlay">
+          </div>
+          <a href="/{{ result['user_name'] }}/video_content/{{ result['album_id']}}/{{ result['file_id'] }}">
+            <div class="ag2video" data-ag2video>
+              <video muted="true" loop controlsList="nodownload" class="w-100
+                shadow-1-strong rounded mb-3" src="{{ result['folder'] }}/{{
+                result['file'] }}"></video>
+            </div>
+          </a>
+
+          <div class="overlay1">
+            <div class="row">
+              <div class="col-4">
+                <a href="https://qiita.com/nakanishi03/items/c80a16b9b9796c25f890">
+                  <i class="bi bi-suit-heart btn-01 mr-1"></i>
+                </a>
+              </div>
+              <div class="col-4">
+                <i class="bi bi-bookmark btn-01 mr-1"></i>
+              </div>
+              <div class="col-4">
+
+                <i class="bi bi-download btn-01 mr-1"></i>
+              </div>
+            </div>
+          </div>
+          <div class="overlay2">
+            <div class="text">John Doe</div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+
+
+    <p class="h1">おすすめ音楽素材</p>
+
+    <div class="row">
+
+      {% for result in audio_data %}
+      <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
+
+        <div class="card audio-card">
+          <div class="audio-image">
+            <img src="{{ result['folder'] }}/{{ result['audio_img'] }}">
+          </div>
+          <div class="card-block">
+            <h4 class="card-title text-center">Lovekickone</h4>
+            <p class="card-text text-center">neon</p>
+          </div>
+          <div class="text-center">
+            <button class="btn btn-lg
+              btn-video-playpause" data-bs-toggle="tooltip" title="Play Video" type="button"><i class="bi
+                bi-play-fill"></i><i class="bi bi-pause-fill d-none"></i></button>
+          </div>
+
+          <audio class="audio" controlslist="nodownload">
+            <source src="{{ result['folder'] }}/{{ result['file'] }}">
+            Your browser does not support the audio element.
+          </audio>
+
+          <div class="d-flex justify-content-between">
+            <p1><time class="playback_position">0:00</time></p1>
+            <p2 class=""><time class="end_position"></time></p2>
+          </div>
+          <div class="text-center mb-3 mx-2">
+            <input type="range" class="form-range range" id="customRange1" value="0" min="0" step="1">
+          </div>
+
+        </div>
+
+      </div>
+      {% endfor %}
+    </div>
+
+    <p class="h1">おすすめコード素材</p>
+    <div class="row">
+      {% for result in code_data %}
+      <div class="col-lg-4 col-md-4 mb-lg-0">
+        <a href="/{{ result['user_name'] }}/code_content/{{ result['album_id']}}/{{ result['file_id'] }}"">
+          <div class=" card audio-card">
+          <div class="code-img" style="text-align: center">
+            <img src="{{ result['logo'] }}">
+          </div>
+          <div class="card-block">
+            <h4 class="card-title text-center mt-2">{{ result['title'] }}</h4>
+            <div class="row">
+              <div class="col-7">
+              </div>
+              <div class="col-2 profile_img">
+                <img src="{{ result['icon'] }}" class="">
+              </div>
+              <div class="col-3">
+                <p class="text-muted pt-2">{{ result["name"] }}</p>
+              </div>
+            </div>
+          </div>
+      </div>
+      </a>
+    </div>
+    {% endfor %}
+  </div>
+
+
+
+
+
+
+</div>
+</div>
+
+<script src="/static/audio/audio.js"></script>
+
+<script>
+  //Facebookからログインするときに不要なURLを消す
+  if (window.location.hash == '#_=_') {
+    window.location.hash = '';
+  }
+</script>
+
+
+<script>
+  //祖先から指定data属性を持つ要素を取得するメソッドを作成
+  if (!Element.prototype.ag2closest) {
+    Element.prototype.ag2closest = function (d) {
+      let _el = this;
+      do {
+        if (_el.dataset[d] !== undefined) return _el;
+        _el = _el.parentElement || _el.parentNode;
+      } while (_el !== null && _el.nodeType === 1);
+      return null;
+    };
+  }
+  //指定ノードを子要素に持つか確認するメソッドを作成
+  if (!Node.prototype.ag2contains) {
+    Node.prototype.ag2contains = function (n) {
+      while (n !== null) {
+        if (n === this) return true;
+        n = n.parentElement || n.parentNode;
+      }
+      return false;
+    };
+  }
+
+  //初期設定値
+  const ag2videoSettings = {
+    dataName: 'ag2video', //親要素に付与してあるdata属性名
+    classActive: 'ag2videoOn', //マウスオンで付与するクラス名
+  };
+  //現在再生中のvideo要素を保持する変数
+  let currentVideo = null;
+  const ag2video = {
+    on: function (t) {
+      //クラスを付与
+      t.classList.add(ag2videoSettings.classActive);
+      //現在のvideo要素を代入して保持
+      currentVideo = t.querySelector('video');
+
+      //頭に戻す場合
+      // currentVideo.currentTime = 0;
+      //再生
+      currentVideo.play();
+
+      currentVideo.addEventListener('timeupdate', function () {
+        ag2video.progerss(t);
+      });
+    },
+    off: function (t) {
+      //停止
+      currentVideo.pause();
+      //posterを再表示させる場合(リロード)
+
+      currentVideo.removeEventListener('timeupdate', function () {
+        ag2video.progerss(t);
+      });
+
+      //クラスを削除
+      t.classList.remove(ag2videoSettings.classActive);
+      currentVideo = null;
+    },
+    progerss: function (t) { //プログレスバー
+      if (t.classList.contains(ag2videoSettings.classActive)) return;
+      let percent = Math.floor(currentVideo.currentTime / currentVideo.duration * 1000) / 10;
+      console.log(percent + '%');
+    }
+  };
+
+  document.addEventListener('mouseover', function () {
+    //ターゲット(またはその親要素)が「data-ag2video」属性を持っていて、かつ現表示の要素ではない場合
+    let videoTarget = event.target.ag2closest(ag2videoSettings.dataName);
+    if (videoTarget && videoTarget !== currentVideo) {
+      ag2video.on(videoTarget);
+    }
+  });
+  document.addEventListener('mouseout', function () {
+    //再生中の場合
+    if (currentVideo) {
+      //移動先がブラウザウィンドウ外ではなく、かつ以下のどちらかの場合はreturn
+      //移動元が現表示の親要素、かつ移動先がその子要素の場合
+      //移動元が現表示の親要素の子要素、かつ移動先が現表示の親要素(またはその子要素)の場合
+      if (event.relatedTarget && ((event.target === currentVideo && event.target.ag2contains(event.relatedTarget)) || (currentVideo.ag2contains(event.target) && currentVideo === event.relatedTarget.ag2closest(ag2videoSettings.dataName)))) return;
+
+      let videoTarget = event.target.ag2closest(ag2videoSettings.dataName);
+      ag2video.off(videoTarget);
+    }
+  });
+</script>
+
+<div style="clear:both;"></div>
+
+
+
+{% endblock %}

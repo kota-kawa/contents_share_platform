@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<!-- saved from url=(0054)https://colorlib.com/etc/cf/ContactFrom_v12/index.html -->
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>Contact V12</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="icon" type="image/png" href="https://colorlib.com/etc/cf/ContactFrom_v12/images/icons/favicon.ico">
+
+  <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css">
+
+
+  <link rel="stylesheet" type="text/css" href="/static/contact_form/main.css">
+
+  <meta name="robots" content="noindex, follow">
+</head>
+
+<body>
+  <div class="bg-contact100" style="background-image: url(&#39;images/bg-01.jpg&#39;);">
+    <div class="container-contact100">
+      <div class="wrap-contact100">
+        <div class="contact100-pic js-tilt" data-tilt=""
+          style="will-change: transform; transform: perspective(300px) rotateX(0deg) rotateY(0deg);">
+          <img src="/static/contact_form/img-01.png" alt="IMG">
+        </div>
+        <form class="contact100-form validate-form" id="form" action="/contact_post" method="POST"
+          enctype="multipart/form-data" class="pure-form pure-form-stacked">
+          <fieldset>
+
+            <span class="contact100-form-title">
+              Get in touch
+            </span>
+            <div class="wrap-input100 validate-input" data-validate="Name is required">
+              <input class="input100" type="text" name="name" placeholder="Name" control-id="ControlID-1"
+                maxlength="50">
+              <span class="focus-input100"></span>
+              <span class="symbol-input100">
+                <i class="fa fa-user" aria-hidden="true"></i>
+              </span>
+            </div>
+            <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
+              <input class="input100" type="email" name="email" placeholder="Email" control-id="ControlID-2"
+                maxlength="50">
+              <span class="focus-input100"></span>
+              <span class="symbol-input100">
+                <i class="fa fa-envelope" aria-hidden="true"></i>
+              </span>
+            </div>
+            <div class="wrap-input100 validate-input" data-validate="Message is required">
+              <textarea class="input100" name="message" placeholder="Message" control-id="ControlID-3"
+                maxlength="200"></textarea>
+              <span class="focus-input100"></span>
+            </div>
+            <div class="container-contact100-form-btn">
+              <button class="contact100-form-btn" id="submit-button" type="button" control-id="ControlID-4">
+                Send
+              </button>
+            </div>
+          </fieldset>
+        </form>
+
+        <script>
+          //画像を送って表示を消す処理
+          const form = document.getElementById("form")
+          const submitButton = document.getElementById("submit-button")
+
+
+          submitButton.onclick = () => {
+            const formData = new FormData(form)
+            const action = form.getAttribute("action")
+            const options = {
+              method: 'POST',
+              body: formData,
+            }
+            fetch(action, options).then((e) => {
+              if (e.status === 200) {
+                form.reset();
+                alert("保存しました。")
+                return
+              }
+              alert("保存できませんでした。")
+            })
+          }
+        </script>
+
+      </div>
+    </div>
+  </div>
+
+
+</body>
+
+</html>

@@ -1,0 +1,145 @@
+{% extends "layout.html" %} {% block contents %}
+
+<link href="/static/video/videoplayer.min.css" rel="stylesheet">
+<link href="/static/icon/bootstrap-icons.css" rel="stylesheet">
+
+<style>
+  .playbar input[type="range"] {
+    -webkit-appearance: none;
+    /* 🚩これ無しだとスタイルが全く反映されないので注意 */
+    appearance: none;
+    cursor: pointer;
+    /* カーソルを分かりやすく */
+    outline: none;
+    /* スライダーのアウトラインは見た目がキツイので消す */
+    height: 14px;
+    /* バーの高さ */
+    width: 100%;
+    /* バーの幅 */
+    background: #0e6c1e;
+    /* バーの背景色 */
+    border-radius: 10px;
+    /* バーの両端の丸み */
+    border: solid 3px #dff1ff;
+    /* バー周囲の線 */
+  }
+
+  /* WebKit向けのつまみ */
+  .playbar input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    /*  🚩デフォルトのつまみのスタイルを解除 */
+    background: #000000;
+    /* 背景色 */
+    width: 24px;
+    /* 幅 */
+    height: 24px;
+    /* 高さ */
+    border-radius: 50%;
+    /* 円形に */
+    box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.15);
+    /* 影 */
+  }
+
+  /* Moz向けのつまみ */
+  .playbar input[type="range"]::-moz-range-thumb {
+    background: #000000;
+    /* 背景色 */
+    width: 24px;
+    /* 幅 */
+    height: 24px;
+    /* 高さ */
+    border-radius: 50%;
+    /* 円形に */
+    box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.15);
+    /* 影 */
+    border: none;
+    /* デフォルトの線を消す */
+  }
+
+  /* Firefoxで点線が周りに表示されてしまう問題の解消 */
+  .playbar input[type="range"]::-moz-focus-outer {
+    border: 0;
+  }
+
+  /* つまみをドラッグしているときのスタイル */
+  .playbar input[type="range"]:active::-webkit-slider-thumb {
+    box-shadow: 0px 5px 10px -2px rgba(0, 0, 0, 0.3);
+  }
+</style>
+<br>
+<div class="container">
+  <div class="content">
+    <div class="row">
+      <div class="col">
+        <div class="position-relative">
+          <div class="hide">
+            <div class="box">
+              <div class="ratio ratio-16x9 bg-dark">
+
+                <!--<video controlsList="nodownload" class="video" playsinline muted
+                src="/static/video/snow.mp4"> poster=""
+              </video>-->
+                <video controlsList="nodownload" muted="" playsinline="" class="video" id="video">
+                  <source src="/static/video/snow.mp4#t=0.1" type="video/mp4">
+                </video>
+
+
+                <div class="d-flex justify-content-center before_div">
+                  <div style="top: 25%;" class="position-absolute top-60
+                  start-20 my-2">
+                    <button id="big_video-playpause" class="btn btn-lg btn before_play" type="button">
+                      <i class="bi bi-play-fill big-play-fill"></i></button>
+                  </div>
+                </div>
+
+                <div class="overlay1 d-none">
+                  <div class="d-flex justify-content-center">
+                    <div style="top: 25%;" class="position-absolute top-60
+                    start-20 my-2">
+                      <button id="big_btn_back" class="btn btn-lg back" type="button"><i class="bi bi-arrow-counterclockwise
+                        "></i></button>
+
+                      <button id="big_video-playpause" class="btn btn-lg btn play" type="button">
+                        <i class="bi bi-play-fill big-play-fill d-none"></i><i
+                          class="bi bi-pause-fill big-pause-fill"></i></button>
+                      <button id="big_btn_forward" class="btn btn-lg go" type="button"><i
+                          class="bi bi-arrow-clockwise"></i></button>
+                    </div>
+                  </div>
+
+
+                  <p1 class="position-absolute"><time id="playback_position">0:00</time></p1>
+                  <div class="position-absolute start-50 translate-middle
+                  px-3
+                  w-100 playbar" style="top: 85%;">
+                    <input type="range" name="speed" id="progress" class="range" value="0" min="0" step="1">
+                  </div>
+                  <p2 class="position-absolute"><time id="end_position"></time></p2>
+                  <button class="btn btn-lg btn-video-playpause
+                  position-absolute start-0" data-bs-toggle="tooltip" title="Play Video" type="button"><i
+                      class="bi bi-play-fill"></i><i class="bi bi-pause-fill d-none"></i></button>
+
+                  <button class="btn btn-lg
+                  btn-video-volume mx-2 position-absolute" type="button"><i class="bi bi-volume-up"></i><i
+                      class="bi bi-volume-mute d-none"></i></button>
+
+
+                  <button class="btn btn-lg
+                  btn-video-fullscreen position-absolute" title="Full
+                  Screen"><i class="bi bi-arrows-fullscreen"></i></button>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<script src="/static/video/example.js"></script>
+
+{% endblock %}

@@ -1,0 +1,166 @@
+{% if mode == 'again' %}
+<!DOCTYPE html>
+<!-- saved from url=(0051)https://getbootstrap.jp/docs/4.3/examples/checkout/ -->
+
+<html lang="ja">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Signin Template for Bootstrap · Bootstrap</title>
+  <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+</head>
+
+
+<body>
+
+  <style>
+    body {
+      background-color: #60a564;
+
+    }
+  </style>
+
+  <div class="container position-relative py-5 h-100 ">
+    <div class="row d-flex justify-content-center align-items-center h-100 ">
+      <div class="col-12 col-xs-10 col-md-9 col-lg-7 col-xl-6 ">
+        <div class="card" style="border-radius: 15px;">
+          <div class="card-body p-5 ">
+            <h2 class="text-uppercase text-center mb-3">Create an account</h2>
+            <p style="color:rgb(91, 7, 132)">ユーザー名が既に使われています</p>
+
+            <form action="/register-upload" method="POST" class="needs-validation" novalidate="">
+              <div class="form-outline mb-4">
+                <input type="text" name="name" id="firstName" required="" class="form-control
+                    form-control-lg" placeholder="Name" />
+              </div>
+
+              <div class="form-outline mb-4">
+                <input type="text" name="username" id="username" required="" class="form-control
+                    form-control-lg" placeholder="IdentifiedName" />
+              </div>
+
+
+              <div class="form-outline mb-4">
+                <input type="email" name="email" id="email" required="" class="form-control
+                    form-control-lg" placeholder="Email" />
+              </div>
+
+              <div class="form-outline mb-4">
+                <input type="password" name="password" id="address" required="" class="form-control
+                    form-control-lg" placeholder="Password" />
+              </div>
+
+
+
+
+              <div class="form-check d-flex justify-content-center mb-5">
+                <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3cg" />
+                <label class="form-check-label" for="form2Example3g">
+                  I agree all statements in <a href="#!" class="text-body"><u>Terms
+                      of service</u></a>
+                </label>
+              </div>
+
+              <div class="d-flex justify-content-center">
+                <button class="btn btn-primary btn-lg btn-block w-75 mt-3
+                    border-0" type="submit" style="background-color: #4fb559;">Register</button>
+              </div>
+
+              <p class="text-center text-muted mt-5 mb-1">Have already an
+                account? <a href="/login" class="fw-bold text-body"><u>Login here</u></a></p>
+
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</body>
+
+</html>
+
+{% else %}
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Signin Template for Bootstrap · Bootstrap</title>
+  <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+</head>
+
+
+<body>
+
+  <style>
+    body {
+      background-color: #60a564;
+
+    }
+  </style>
+
+  <div class="container position-relative py-5 h-100 ">
+    <div class="row d-flex justify-content-center align-items-center h-100 ">
+      <div class="col-12 col-xs-10 col-md-9 col-lg-7 col-xl-6 ">
+        <div class="card" style="border-radius: 15px;">
+          <div class="card-body p-5 ">
+            <h2 class="text-uppercase text-center mb-5">Create an account</h2>
+            <form action="/register-upload" method="POST" class="needs-validation" novalidate="">
+              <div class="form-outline mb-4">
+                <input type="text" name="name" id="firstName" required="" class="form-control
+                    form-control-lg" placeholder="Name" />
+              </div>
+
+              <div class="form-outline mb-4">
+                <input type="text" name="username" id="username" required="" class="form-control
+                    form-control-lg" placeholder="IdentifiedName" />
+              </div>
+
+
+              <div class="form-outline mb-4">
+                <input type="email" name="email" id="email" required="" class="form-control
+                    form-control-lg" placeholder="Email" />
+              </div>
+
+              <div class="form-outline mb-4">
+                <input type="password" name="password" id="address" required="" class="form-control
+                    form-control-lg" placeholder="Password" />
+              </div>
+
+
+
+
+              <div class="form-check d-flex justify-content-center mb-5">
+                <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3cg" />
+                <label class="form-check-label" for="form2Example3g">
+                  I agree all statements in <a href="#!" class="text-body"><u>Terms
+                      of service</u></a>
+                </label>
+              </div>
+
+              <div class="d-flex justify-content-center">
+                <button class="btn btn-primary btn-lg btn-block w-75 mt-3
+                    border-0" type="submit" style="background-color: #4fb559;">Register</button>
+              </div>
+
+              <p class="text-center text-muted mt-5 mb-1">Have already an
+                account? <a href="/login" class="fw-bold text-body"><u>Login here</u></a></p>
+
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</body>
+
+</html>
+{% endif %}

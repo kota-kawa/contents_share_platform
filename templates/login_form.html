@@ -1,0 +1,213 @@
+
+{% if mode == 'again' %}
+<!DOCTYPE html>
+<html lang="ja"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Signin Template for Bootstrap · Bootstrap</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <link href="/static/icon/bootstrap-icons.css" rel="stylesheet">
+  </head>
+  <body>
+
+
+      <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+          <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+            <div class="card shadow-2-strong" style="border-radius: 1rem;">
+              <div class="card-body p-5 text-center">
+    
+                <h3 class="mb-5">Sign in</h3>
+    
+                <form action="/login" method="POST" class="form-signin">
+    
+                  <div class="form-outline mb-5">
+                    <input type="email" name="email" id="inputEmail" required=""
+                      class="form-control
+                      form-control-lg" placeholder="Email" />
+                  </div>
+    
+                  <div class="form-outline">
+                    <input type="password" name="password" id="inputPassword"
+                      required="" class="form-control
+                      form-control-lg" placeholder="Password"/>
+                  </div>
+
+                  <p class="mb-3" style="color:rgb(119, 11, 173)">メールアドレスかパスワードが違います</p>
+                  
+                  <a href="/register">新規登録</a>
+                  <a>・</a>
+                  <a href="http://localhost:5000/register">パスワードを忘れた</a>
+    
+                  
+                  <button class="btn btn-primary btn-lg btn-block b-login w-75 mt-5"
+                type="submit"
+                style="background-color: #0e6e17;">Login
+
+                <div class="spinner-border text-warning float-end d-none" role="status">
+                  <span class="visually-hidden">Loading...</span>
+                </div>
+              </button>
+            </form>
+
+            <hr class="my-4">
+
+            <button class="btn btn-lg btn-block btn-primary b-google mb-3 border-0 w-75"
+              style="background-color: #dd4b39;"
+              type="button" onclick="location.href='google_login'"><i class="bi bi-google me-2"></i> Sign in with
+              google
+              <div class="spinner-border float-end text-info d-none" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+            </button>
+            <button class="btn btn-lg btn-block btn-primary b-facebook mb-2 border-0 w-75"
+              style="background-color: #3b5998;"
+              type="button" onclick="location.href='/facebook_login'"><i class="bi bi-facebook me-2"></i>Sign in with
+              facebook
+              <div class="spinner-border float-end text-success d-none" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+            </button>
+    
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+ 
+   </body></html>
+<script>
+  var login = document.querySelector(".b-login");
+  var google = document.querySelector(".b-google");
+  var facebook = document.querySelector(".b-facebook")
+
+  login.addEventListener("click", (e) => {
+    login.querySelector('.text-warning').classList.remove('d-none');
+    });
+
+    google.addEventListener("click", (e) => {
+      google.querySelector('.text-info').classList.remove('d-none');
+    });
+
+    facebook.addEventListener("click", (e) => {
+      facebook.querySelector('.text-success').classList.remove('d-none');
+    });
+</script>
+
+<style>
+    body{
+    background-color: #314728;
+  }
+
+  a {
+    color: #679b4d;
+  }
+</style>
+
+{% else %}
+<!DOCTYPE html>
+<html lang="ja"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Signin Template for Bootstrap · Bootstrap</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <link href="/static/icon/bootstrap-icons.css" rel="stylesheet">
+  </head>
+  <body>
+
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-12 col-xs-10 col-md-8 col-lg-6 col-xl-5">
+        <div class="card shadow-2-strong" style="border-radius: 1rem;">
+          <div class="card-body p-5 text-center">
+
+            <h3 class="mb-5">Sign in</h3>
+
+            <form action="/login" method="POST" class="form-signin">
+
+              <div class="form-outline mb-5">
+                <input type="email" name="email" id="inputEmail" required=""
+                  class="form-control
+                  form-control-lg" placeholder="Email" />
+              </div>
+
+              <div class="form-outline">
+                <input type="password" name="password" id="inputPassword"
+                  required="" class="form-control
+                  form-control-lg" placeholder="Password"/>
+              </div>
+
+              <a href="/register">新規登録</a>
+              <a>・</a>
+              <a href="http://localhost:5000/register">パスワードを忘れた</a>
+
+              
+
+              <button class="btn btn-primary btn-lg btn-block b-login w-75 mt-5"
+                type="submit"
+                style="background-color: #0e6e17;">Login
+
+                <div class="spinner-border text-warning float-end d-none" role="status">
+                  <span class="visually-hidden">Loading...</span>
+                </div>
+              </button>
+            </form>
+
+            <hr class="my-4">
+
+            <button class="btn btn-lg btn-block btn-primary b-google mb-3 border-0 w-75"
+              style="background-color: #dd4b39;"
+              type="button" onclick="location.href='google_login'"><i class="bi bi-google me-2"></i> Sign in with
+              google
+              <div class="spinner-border float-end text-info d-none" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+            </button>
+            <button class="btn btn-lg btn-block btn-primary b-facebook mb-2 border-0 w-75"
+              style="background-color: #3b5998;"
+              type="button" onclick="location.href='/facebook_login'"><i class="bi bi-facebook me-2"></i>Sign in with
+              facebook
+              <div class="spinner-border float-end text-success d-none" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+            </button>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body></html>
+<script>
+  //ボタンを押すとスピナーを表示
+  var login = document.querySelector(".b-login");
+  var google = document.querySelector(".b-google");
+  var facebook = document.querySelector(".b-facebook")
+
+  login.addEventListener("click", (e) => {
+    login.querySelector('.text-warning').classList.remove('d-none');
+    });
+
+    google.addEventListener("click", (e) => {
+      google.querySelector('.text-info').classList.remove('d-none');
+   
+    });
+
+    facebook.addEventListener("click", (e) => {
+      facebook.querySelector('.text-success').classList.remove('d-none');
+   
+    });
+</script>
+
+<style>
+  body{
+    background-color: #314728;
+  }
+  a {
+
+    color: #679b4d;
+  }
+</style>
+
+{% endif %}

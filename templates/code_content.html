@@ -1,0 +1,94 @@
+{% extends "layout.html" %}
+
+{% block contents %}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/themes/prism.min.css">
+  <link rel="stylesheet" href="/static/css/code_contents.css">
+
+
+  <div class="content">
+    <div class="container">
+      <div class="row">
+
+        {% for i in range(album_count) %}
+        <pre class="bg-light"><code class="language-python">
+          {{- inside_text_list[i] }}
+          <br>
+        </code></pre>
+        {% endfor %}
+
+
+
+          <!--　コンテンツの削除　-->
+       {% if mode == 'private' %}
+       <form id="form" action="/contents_remove/{{ user_name }}/{{ album_id }}" method="POST"
+        enctype="multipart/form-data" >
+        <div class="remove-button">
+       <button type="submit" class="btn btn-secondary">remove</button>
+        </div>
+       </form>
+       {% endif %}
+
+       <div class="profile_img text-center">
+        {% if mode == 'private' %}
+        <a href="/user-photos/{{ contents_user }}">
+         <img src="{{ icon }}"
+         alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2"
+         >
+         <p>{{ user_name }}</p>
+        </a>
+        
+        {% else %}
+       <a href="/photos/{{ contents_user }}">
+       <img src="{{ icon }}"
+         alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2"
+         > </a>
+         <p>{{ to_user_name }}</p>
+
+         {% if mode == 'unfollow' %}
+
+         <form id="form" action="/follow/{{ to_user_name }}" method="POST"
+           enctype="multipart/form-data" >
+           <button id="submit-button" type="button"  class="btn btn-secondary"><a id="follow">Follow</a></button>
+
+         </form>
+
+         {% else %}
+         <form id="form" action="/follow/{{ to_user_name }}" method="POST"
+           enctype="multipart/form-data" >
+           <button id="submit-button" type="button"  class="btn btn-secondary"><a id="follow">Unfollow</a></button>
+
+         </form>
+        
+         {% endif %}
+       
+       {% endif %}
+
+         </div>
+
+         <form action="/post-comment/{{ album_id }}/{{ file_id }}" method="POST"
+         enctype="multipart/form-data"
+         class="pure-form pure-form-stacked">
+
+         <fieldset>
+
+          <div class="comment-form">
+          <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label">コメント</label>
+            <textarea name="comment" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+          </div>
+          <div class="d-flex justify-content-end comment-button">
+          <button class="btn btn-primary btn-lg btn-block" type="submit" control-id="ControlID-20">コメントする</button>
+        </div>
+          </div>
+        </div>
+        </fieldset>
+        </form>
+
+
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/components/prism-python.min.js"></script>
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends "before_layout.html" %} {% block contents %}
+
+  
+  <link rel="stylesheet" href="/static/css/top-page.css">
+
+      
+  <header class="masthead">
+    <div class="container position-relative">
+      <div class="row justify-content-center align-items-center">
+        <div class="col-12 col-xl-6 text-center">
+          <!-- Page heading-->
+          <h5 class="text-white mb-5">探している画像をみつけよう！</h5>
+          <!-- Signup form-->
+          <form action="/search" method="POST" class="form-subscribe"
+            id="contactForm" data-sb-form-api-token="API_TOKEN">
+            <div class="row">
+              <div class="col">
+                <input class="form-control form-control-lg" name="kensaku"
+                  id="emailAddress" type="text" placeholder="検索キーワード"
+                  data-sb-validations="required,email" />
+              </div>
+              <div class="col-auto">
+                <button class="btn btn-primary btn-lg btn-gradient" type="submit">　検索　</button>
+              </div>
+            </div>
+            <div class="invalid-feedback text-white"
+              data-sb-feedback="emailAddress:required">検索キーワードが必要です。</div>
+            <div class="invalid-feedback text-white"
+              data-sb-feedback="emailAddress:email">有効なメールアドレスを入力してください。</div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </header>
+        
+        <br>
+        <h3>おすすめ素材Before</h3>
+
+        <div class="album py-5 bg-light">
+            <div class="container">
+              <div class="row">
+                {% for result in data %}
+                <div class="im col-lg-4 col-md-12 mb-4 mb-lg-0">
+                <a href='/{{ result["user_name"] }}/content/{{ result["album_id"] }}/{{ result["file_id"] }}'>
+                  <img
+                    src='{{ result["folder"] }}/{{ result["file"] }}'
+                    class="w-100 shadow-1-strong rounded mb-4"
+                    alt="Boat on Calm Water"
+                  />
+                </a>
+                </div>
+                {% endfor %}
+        </div>
+    </div>
+  </div>
+            
+            <div style="clear:both;"></div>
+ {% endblock %}

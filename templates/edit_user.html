@@ -1,0 +1,95 @@
+{% extends "layout.html" %} {% block contents %}
+
+
+  
+<link rel="stylesheet" href="/static/css/edit_user.css">
+
+<form id="form" action="/change_edit_user/{{ user_name }}" method="POST"
+         enctype="multipart/form-data" >
+
+         <fieldset>
+
+<section class="h-100 gradient-custom-2">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col col-lg-9 col-xl-7">
+        <div class="card">
+          
+          <div class="rounded-top text-black d-flex flex-row sample-box">
+
+            <div class="back_list" id="imm">
+            <img src="{{ background }}">
+            </div>
+
+            <div class="ms-4 mt-5 d-flex flex-column youtube" style="width: 150px;">
+      
+              <div class="icon_list" id="im">
+              <img src="{{ icon }}"
+                alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2"
+                >
+              </div>
+    
+                <div class="input-group rounded txform">
+                  <input type="text" name="name" class="form-control rounded" value="{{ name }}" />
+                </div>
+
+            </div>
+
+          </div>
+          <div class="p-4 text-black" style="background-color: #f8f9fa;">
+            <div class="d-flex justify-content-end text-center py-1">
+              <div class="cent">
+              <label>
+                <span class="btn btn-secondary">
+                    icon
+                    <input type="file" name="icon" id="input1" style="display:none">
+                </span>
+            </label>
+            <a>　</a>
+            <label>
+              <span class="btn btn-secondary">
+                background
+                <input type="file" name="background" id="input2" style="display:none">
+              </span>
+            </label>
+              </div>
+
+              <div>
+                <p class="mb-1 h5">253</p>
+                <p class="small text-muted mb-0">Photos</p>
+              </div>
+              <div class="px-3">
+                <p class="mb-1 h5">1026</p>
+                <p class="small text-muted mb-0">Followers</p>
+              </div>
+              <div>
+                <p class="mb-1 h5">478</p>
+                <p class="small text-muted mb-0">Following</p>
+              </div>
+            </div>
+          </div>
+          <div class="card-body p-4 text-black">
+            <div class="mb-5">
+              <p class="lead fw-normal mb-1">About</p>
+              <div class="form-group">
+                <textarea id="textarea1" name="about" class="form-control">{{ about }}</textarea>
+              </div>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-outline-secondary">　保存　</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</fieldset>
+</form>
+  </section>
+
+
+  <script src="/static/js/edit_user.js"></script>
+
+            <div style="clear:both;"></div>
+           
+ {% endblock %}

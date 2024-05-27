@@ -1,0 +1,310 @@
+{% extends "layout.html" %} {% block contents %}
+
+<link href="/static/css/upload.css" rel="stylesheet">
+
+<style>
+  body {
+    background-color: rgb(172, 215, 169);
+  }
+</style>
+
+<div class="content">
+  <div class="container bg-light">
+    <br>
+
+    <!-- コントローラー部分 -->
+    <div class="d-flex justify-content-center">
+      <nav aria-label="Page navigation example">
+        <ul class="pagination">
+          <li class="page-item"><input type="button" class="page-link
+              slide-first" value="写真"></li>
+          <li class="page-item"><input type="button" class="page-link
+              slide-second" value="ビデオ"></li>
+          <li class="page-item"><input type="button" class="page-link
+              slide-third" value="Audio"></li>
+          <li class="page-item"><input type="button" class="page-link
+              slide-fourth" value="Code"></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div id="carousel" class="carousel slide" data-bs-interval="10000000">
+      <div class="carousel-inner">
+
+        <!-- First Slide -->
+        <div class="carousel-item active">
+
+          <form id="form" action="/upload/{{ user_name }}" method="POST" enctype="multipart/form-data"
+            class="pure-form pure-form-stacked" name="upload_form">
+            <fieldset>
+              <div class="file-preview-area">
+                <div class="image-list" id="list">
+
+                </div>
+              </div>
+
+              <div id="upFileWrap">
+                <div id="inputFile">
+                  <div class="file-zone">
+                    画像ファイルを<br>ドロップしてください
+                  </div>
+
+                  <div id="inputFileWrap">
+                    <input type="file" name="upfile" multiple="" id="uploadFile">
+                    <div id="btnInputFile"><span>ファイルを選択する</span></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- チェックボックス -->
+
+              <div class="align-items-center">
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                  <label class="form-check-label" for="flexRadioDefault1">
+                    写真
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                  <label class="form-check-label" for="flexRadioDefault2">
+                    イラスト
+                  </label>
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label for="email">タイトル <span class="text-muted">(Optional)</span></label>
+                <input type="text" name="title" class="form-control" id="email" placeholder="タイトルを入力"
+                  control-id="ControlID-6" minlength="1" maxlength="20" required>
+              </div>
+
+              <div class="form-group">
+                <label for="textarea1">画像の説明</label>
+                <textarea id="textarea1" name="explain" class="form-control" maxlength="200"></textarea>
+              </div>
+
+              <div class="mb-3">
+                <label for="email">タグ <span class="text-muted">（入力例：アニメ イラスト
+                    映画）空白は半角、全角の両方OK</span></label>
+                <input type="text" name="tag" class="form-control" id="email" placeholder="タグを入力"
+                  control-id="ControlID-6">
+              </div>
+
+              <br>
+
+              <button type="submit" class="btn btn-water btn-lg btn-block" id="submit-button">Upload</button>
+            </fieldset>
+          </form>
+
+          <div class="progress mt-5" style="display: none;">
+            <div class="progress-bar progress-bar-striped bg-success progress-bar-animated" role="progressbar"
+              style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
+          </div>
+
+        </div>
+
+
+        <!-- 動画 -->
+        <div class="carousel-item">
+          <form id="video_form" action="/video_upload/{{ user_name }}" method="POST" enctype="multipart/form-data"
+            class="pure-form pure-form-stacked" name="video_upload_form">
+            <fieldset>
+
+              <div class="video-file-preview-area d-flex
+                justify-content-center">
+                <div class="video-list" id="v_list">
+                </div>
+              </div>
+
+              <div id="v_upFileWrap">
+                <div id="v_inputFile">
+                  <div class="v_file-zone">
+                    動画ファイルを<br>ドロップしてください
+                  </div>
+
+                  <div id="v_inputFileWrap">
+                    <input type="file" name="video_file" multiple="" id="v_uploadFile" accept="video/*">
+                    <div id="v_btnInputFile"><span>ファイルを選択する</span></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label for="email">タイトル <span class="text-muted">(Optional)</span></label>
+                <input type="text" name="title" class="form-control" id="email" placeholder="タイトルを入力"
+                  control-id="ControlID-6" minlength="1" maxlength="20" required>
+              </div>
+
+              <div class="form-group">
+                <label for="textarea1">動画の説明</label>
+                <textarea id="textarea1" name="explain" class="form-control" maxlength="200"></textarea>
+              </div>
+
+              <div class="mb-3">
+                <label for="email">タグ <span class="text-muted">（入力例：アニメ イラスト
+                    映画）空白は半角、全角の両方OK</span></label>
+                <input type="text" name="video_tag" class="form-control" id="email" placeholder="タグを入力"
+                  control-id="ControlID-6">
+              </div>
+
+              <div class="progress progress-video mt-5" style="display: none;">
+                <div class="progress-bar progress-bar-video progress-bar-striped bg-success progress-bar-animated"
+                  role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
+              </div>
+              <br>
+
+              <button type="submit" class="btn btn-purple btn-lg btn-block" id="video-submit-button">Upload</button>
+            </fieldset>
+          </form>
+
+
+
+        </div>
+
+
+        <!--オーディオ-->
+        <div class="carousel-item">
+          <form id="audio_form" action="/audio_upload/{{ user_name }}" method="POST" enctype="multipart/form-data"
+            class="pure-form pure-form-stacked" name="audio_upload_form">
+            <fieldset>
+              <div class="audio-file-preview-area d-flex
+                justify-content-center">
+                <div class="audio-list" id="audio_list">
+
+                </div>
+              </div>
+
+              <div id="audio_upFileWrap">
+                <div id="audio_inputFile">
+                  <div class="audio_file-zone">
+                    アルバム画像を<br>ドロップしてください
+                  </div>
+
+                  <div id="audio_inputFileWrap">
+                    <input type="file" name="audio_img" id="audio_uploadFile" accept="image/*">
+                    <div id="audio_btnInputFile"><span>ファイルを選択する</span></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="input-group mb-3">
+                <label class="input-group-text" for="inputGroupFile01">音楽</label>
+                <input type="file" name="audio_file" multiple="" accept="audio/*" class="form-control"
+                  id="inputGroupFile01">
+              </div>
+
+              <div class="mb-3">
+                <label for="email">タイトル <span class="text-muted">(Optional)</span></label>
+                <input type="text" name="title" class="form-control" id="email" placeholder="タイトルを入力"
+                  control-id="ControlID-6" minlength="1" maxlength="20" required>
+              </div>
+
+              <div class="form-group">
+                <label for="textarea1">音楽の説明</label>
+                <textarea id="textarea1" name="explain" class="form-control" maxlength="200"></textarea>
+              </div>
+
+              <div class="mb-3">
+                <label for="email">タグ <span class="text-muted">（入力例：アニメ イラスト
+                    映画）空白は半角、全角の両方OK</span></label>
+                <input type="text" name="audio_tag" class="form-control" id="email" placeholder="タグを入力"
+                  control-id="ControlID-6">
+              </div>
+              <br>
+
+              <button type="submit" class="btn btn-yello btn-lg btn-block" id="audio-submit-button">Upload</button>
+            </fieldset>
+          </form>
+
+          <div class="progress progress-audio mt-5" style="display: none;">
+            <div class="progress-bar progress-bar-audio progress-bar-striped bg-success progress-bar-animated"
+              role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
+          </div>
+
+        </div>
+
+
+        <!--コード-->
+        <div class="carousel-item">
+          <form id="code_form" action="/code_upload/{{ user_name }}" method="POST" enctype="multipart/form-data"
+            class="pure-form pure-form-stacked" name="code_upload_form">
+            <fieldset>
+              <div class="code-file-preview-area d-flex justify-content-center">
+                <div class="code-list" id="code_list">
+
+                </div>
+              </div>
+
+              <div id="code_upFileWrap">
+                <div id="code_inputFile">
+                  <div class="code_file-zone">
+                    コードファイルを<br>ドロップしてください
+                  </div>
+
+                  <div id="code_inputFileWrap">
+                    <input type="file" name="code_file" id="code_uploadFile" accept="" multiple="">
+                    <div id="code_btnInputFile"><span>ファイルを選択する</span></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label for="email">タイトル <span class="text-muted">(Optional)</span></label>
+                <input type="text" name="title" class="form-control" id="email" placeholder="タイトルを入力"
+                  control-id="ControlID-6" minlength="1" maxlength="20" required>
+              </div>
+
+              <div class="form-group">
+                <label for="textarea1">コードの説明</label>
+                <textarea id="textarea1" name="explain" class="form-control" maxlength="200"></textarea>
+              </div>
+
+              <div class="mb-3">
+                <label for="email">タグ <span class="text-muted">（入力例：Python
+                    JavaScript
+                    C#）空白は半角、全角の両方OK</span></label>
+                <input type="text" name="code_tag" class="form-control" id="email" placeholder="タグを入力"
+                  control-id="ControlID-6">
+              </div>
+
+              <br>
+
+              <button type="submit" class="btn btn-darkgreen btn-lg btn-block" id="code-submit-button">Upload</button>
+            </fieldset>
+          </form>
+
+
+          <div class="progress progress-code mt-5" style="display: none;">
+            <div class="progress-bar progress-bar-code progress-bar-striped bg-success progress-bar-animated"
+              role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
+          </div>
+
+        </div>
+
+
+        <script src="/static/js/bootstrap.bundle.min.js"></script>
+        <script src="/static/js/upload.js"></script>
+
+        <script>
+          //upload.jsにユーザー名を渡す
+          const user_name = "{{ user_name }}";
+
+          var carouselObj = new bootstrap.Carousel('#carousel');
+
+          // 特定のフレームに循環
+          document.querySelector('.slide-first').onclick = function () {
+            carouselObj.to(0);
+          };
+          document.querySelector('.slide-second').onclick = function () {
+            carouselObj.to(1);
+          };
+          document.querySelector('.slide-third').onclick = function () {
+            carouselObj.to(2);
+          };
+          document.querySelector('.slide-fourth').onclick = function () {
+            carouselObj.to(3);
+          };
+        </script>
+      </div>
+      {% endblock %}
