@@ -1,0 +1,92 @@
+.gradient-custom-2 {
+  /* fallback for old browsers */
+  background: #fbc2eb;
+
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-linear-gradient(to right, rgba(251, 194, 235, 1), rgba(166, 193, 238, 1));
+
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(to right, rgba(251, 194, 235, 1), rgba(166, 193, 238, 1))
+}
+
+
+/**/
+.cont {
+
+  height: 400px;
+  object-fit: cover;
+  /* この一行を追加するだけでOK! */
+}
+
+.cont img {
+  padding: 10px;
+
+  height: 100%;
+  object-fit: cover;
+}
+
+/**/
+
+
+.im {
+  width: 900px;
+  height: 200px;
+  object-fit: cover;
+  /* この一行を追加するだけでOK! */
+}
+
+.im img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.imm {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  /* この一行を追加するだけでOK! */
+}
+
+.imm img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+.sample-box {
+  position: relative;
+  object-fit: cover;
+}
+
+.youtube {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+
+  position: absolute;
+  top: 10%;
+  left: 0%;
+
+}
+
+.cent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+
+  position: absolute;
+  top: 120%;
+  left: 20%;
+}
+
+h3 {
+
+  font-size: 30px;
+  text-align: left;
+  /* 要素の高さ：48px（要素を配置するときの高さの基準の2倍） */
+
+}

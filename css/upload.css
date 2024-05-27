@@ -1,0 +1,369 @@
+.container {
+  max-width: 960px;
+}
+
+#inputFile {
+  position: relative;
+  padding: 180px 0 100px;
+  text-align: center;
+}
+
+#uploadFile {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  display: block;
+  width: 300px;
+  height: 80px;
+  opacity: 0;
+}
+
+#inputFileWrap {
+  position: relative;
+  display: inline-block;
+}
+
+#btnInputFile
+{
+  width: 300px;
+}
+
+#btnInputFile span{
+  position: relative;
+  z-index: 2;
+  display: table-cell;
+  width: 300px;
+  height: 80px;
+  border: 1px solid rgb(6, 151, 151);
+  border-radius: 4px;
+  background: rgb(6, 151, 151);
+  text-decoration: none;
+  color: #fff;
+  font-size: 26px;
+  line-height: 1;
+  font-weight: bold;
+  vertical-align: middle;
+}
+
+.file-zone {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 100px 0 0;
+  border: 2px dashed #494949;
+  background: rgba(22, 165, 191, 0);
+  transition: all 0.25s cubic-bezier(0.21, 0.51, 0.51, 1);
+}
+
+.file-zone.on  {
+  border: 2px solid rgb(135, 206, 206);
+  background: rgb(135, 206, 206);
+}
+
+.file-preview-area {
+  width: 100%;
+  min-height: 300px;
+  border: 1px solid white;
+  border-radius: 5px;
+  background: rgb(130, 200, 212);
+  padding: 5px;
+  box-sizing: border-box;
+  margin-top: 20px;
+}
+
+.file-preview-area .image-list {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 200px;
+}
+
+.file-preview-area .image-list > img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+} 
+
+.btn-water {
+  background-color: rgb(6, 151, 151);
+  border-color: rgb(6, 151, 151);
+  color: white;
+}
+
+/*************ここから動画の画面***********************/
+
+#v_inputFile {
+  position: relative;
+  padding: 180px 0 100px;
+  text-align: center;
+}
+
+#v_uploadFile {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  display: block;
+  width: 300px;
+  height: 80px;
+  opacity: 0;
+}
+
+#v_inputFileWrap {
+  position: relative;
+  display: inline-block;
+}
+
+#v_btnInputFile {
+  width: 300px;
+}
+
+#v_btnInputFile span{
+  position: relative;
+  z-index: 2;
+  display: table-cell;
+  width: 300px;
+  height: 80px;
+  border: 1px solid rgb(105, 42, 207);
+  border-radius: 4px;
+  background: rgb(105, 42, 207);
+  text-decoration: none;
+  color: #fff;
+  font-size: 26px;
+  line-height: 1;
+  font-weight: bold;
+  vertical-align: middle;
+}
+
+.v_file-zone {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 100px 0 0;
+  border: 2px dashed #494949;
+  background: rgba(22, 165, 191, 0);
+  transition: all 0.25s cubic-bezier(0.21, 0.51, 0.51, 1);
+}
+
+.v_file-zone.v_on  {
+  border: 2px solid rgb(139, 108, 187);
+  background: rgb(139, 108, 187);
+}
+
+.video-file-preview-area {
+  width: 100%;
+  min-height: 300px;
+  border: 1px solid white;
+  border-radius: 5px;
+  background: rgb(119, 80, 182);
+  padding: 5px;
+  box-sizing: border-box;
+  margin-top: 20px;
+}
+
+.video-file-preview-area .video-list {
+  height: 300px;
+  width: 500px;
+}
+
+.video-file-preview-area .video-list > video {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+} 
+
+.btn-purple {
+  background-color: rgb(105, 42, 207);
+  border-color: rgb(105, 42, 207);
+  color: white;
+}
+
+
+/*************ここからオーディオの画面***********************/
+
+#audio_inputFile {
+  position: relative;
+  padding: 180px 0 100px;
+  text-align: center;
+}
+
+#audio_uploadFile {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  display: block;
+  width: 300px;
+  height: 80px;
+  opacity: 0;
+}
+
+#audio_inputFileWrap {
+  position: relative;
+  display: inline-block;
+
+}
+
+#audio_btnInputFile {
+  width: 300px;
+}
+
+#audio_btnInputFile span{
+  position: relative;
+  z-index: 2;
+  display: table-cell;
+  width: 300px;
+  height: 80px;
+  border: 1px solid rgb(143, 197, 18);
+  border-radius: 4px;
+  background: rgb(143, 197, 18);
+  text-decoration: none;
+  color: #fff;
+  font-size: 26px;
+  line-height: 1;
+  font-weight: bold;
+  vertical-align: middle;
+}
+
+.audio_file-zone {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 100px 0 0;
+  border: 2px dashed #494949;
+  background: rgba(22, 165, 191, 0);
+  transition: all 0.25s cubic-bezier(0.21, 0.51, 0.51, 1);
+}
+
+.audio_file-zone.audio_on  {
+  border: 2px solid rgb(143, 167, 87);
+  background: rgb(143, 167, 87);
+}
+
+.audio-file-preview-area {
+  width: 100%;
+  min-height: 300px;
+  border: 1px solid white;
+  border-radius: 5px;
+  background: rgb(162, 195, 84);
+  padding: 5px;
+  box-sizing: border-box;
+  margin-top: 20px;
+}
+
+.audio-file-preview-area .audio-list {
+  height: 300px;
+  width: 500px;
+}
+
+.audio-file-preview-area .audio-list > img {
+  margin:0 auto;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+} 
+
+.btn-yello {
+  background-color: rgb(143, 197, 18);
+  border-color: rgb(143, 197, 18);
+  color: white;
+}
+/*************ここからCodeの画面***********************/
+
+#code_inputFile {
+  position: relative;
+  padding: 180px 0 100px;
+  text-align: center;
+}
+
+#code_uploadFile {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  display: block;
+  width: 300px;
+  height: 80px;
+  opacity: 0;
+}
+
+#code_inputFileWrap {
+  position: relative;
+  display: inline-block;
+}
+
+#code_btnInputFile {
+  width: 300px;
+}
+
+#code_btnInputFile span {
+  position: relative;
+  z-index: 2;
+  display: table-cell;
+  width: 300px;
+  height: 80px;
+  border: 1px solid rgb(25, 113, 9);
+  border-radius: 4px;
+  background: rgb(25, 113, 9);
+  text-decoration: none;
+  color: #fff;
+  font-size: 26px;
+  line-height: 1;
+  font-weight: bold;
+  vertical-align: middle;
+}
+
+.code_file-zone {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 100px 0 0;
+  border: 2px dashed #494949;
+  background: rgba(22, 165, 191, 0);
+  transition: all 0.25s cubic-bezier(0.21, 0.51, 0.51, 1);
+}
+
+.code_file-zone.code_on  {
+  border: 2px solid rgba(38, 152, 47, 0.6);
+  background: rgba(38, 152, 47, 0.6);
+}
+
+.code-file-preview-area {
+  width: 100%;
+  min-height: 300px;
+  border: 1px solid white;
+  border-radius: 5px;
+  background: rgb(66, 119, 56);
+  padding: 5px;
+  box-sizing: border-box;
+  margin-top: 20px;
+}
+
+.code-file-preview-area .code-list {
+  height: 300px;
+  width: 500px;
+}
+
+.code-file-preview-area .code-list > img {
+  margin:0 auto;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+} 
+
+.btn-darkgreen {
+  background-color: rgb(25, 113, 9);
+  border-color: rgb(25, 113, 9);
+  color: white;
+}
