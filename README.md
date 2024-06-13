@@ -1,1 +1,2 @@
-# contents_share_platform
+linuxでdocker-composeファイルの置いてあるディレクトリに行って、docker-compose up -dを実行すると、アプリを作成できます。
+このサービスは、画像、動画、音声などのファイルを共有して、SNSのようにいいねができるサービスです。
